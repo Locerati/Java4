@@ -2,13 +2,18 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.util.ArrayList;
+import java.util.List;
 
 import com.opencsv.CSVParser;
 import com.opencsv.CSVParserBuilder;
 import com.opencsv.CSVReader;
 import com.opencsv.CSVReaderBuilder;
 import com.opencsv.exceptions.CsvValidationException;
-
+/**
+ * @author Denis Popov
+ * @version 1.0
+ */
 public class Main {
     public static void main(String[] args) {
 
@@ -25,11 +30,16 @@ public class Main {
                 throw new FileNotFoundException("foreign_names.csv");
             }
             String[] nextLine;
-            while ((nextLine = reader.readNext()) != null) {
-                //А тут работаете с nextLine котрый представляет из себя текущую строчку в файле, уже разбитую на массив по разделителю separator
-//Попробуйте просто вывести на экран этот nextLine и, думаю, все будет понятно
-                int i=0;
+            Mapper mapper=new Mapper();
+            List<Human> humans = new ArrayList<>();
+            while ((nextLine = reader.readNext()) != null) {  //Построчное чтение файла
+                humans.add(mapper.map(nextLine));
             }
+            for (Human i : humans){
+              System.out.println(i.toString());
+            }
+
+
     } catch (IOException e) {
             e.printStackTrace();
         }

@@ -1,3 +1,8 @@
+/**
+ * Класс хранящий информацию об отделе
+ * @author Denis Popov
+ * @version 1.0
+ */
 public class Subdivision {
     private static int countId;
     private int id;
